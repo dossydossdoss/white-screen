@@ -8,12 +8,6 @@ type ColorTool = {
   baseColor: string; // HEX used both here and on the sub-page
 };
 
-type UtilityTool = {
-  name: string;
-  slug: string;
-  description: string;
-};
-
 const colorTools: ColorTool[] = [
   {
     name: "White Screen",
@@ -77,34 +71,6 @@ const colorTools: ColorTool[] = [
   },
 ];
 
-const utilityTools: UtilityTool[] = [
-  {
-    name: "Zoom Lighting",
-    slug: "zoom-lighting",
-    description: "Adjustable soft light screen for video calls and streaming.",
-  },
-  {
-    name: "Tip Screen",
-    slug: "tip-screen",
-    description: "Fake POS tipping screen for pranks, skits, or demos.",
-  },
-  {
-    name: "Signature Screen",
-    slug: "signature-screen",
-    description: "Full-screen signature pad style screen for videos or jokes.",
-  },
-  {
-    name: "DVD Screensaver",
-    slug: "dvd-screen",
-    description: "Classic bouncing DVD logo recreating the nostalgic screensaver.",
-  },
-  {
-    name: "Broken Screen",
-    slug: "broken-screen",
-    description: "Hyper realistic cracked-screen effect for harmless pranks.",
-  },
-];
-
 export default function HomePage() {
   return (
     <main className="min-h-screen bg-slate-950 text-slate-50">
@@ -147,40 +113,6 @@ export default function HomePage() {
                     className="mb-3 aspect-video w-full overflow-hidden rounded-xl border border-slate-800 shadow-inner"
                     style={{ backgroundColor: tool.baseColor }}
                   />
-                  <h3 className="text-sm sm:text-base font-semibold text-slate-50">
-                    {tool.name}
-                  </h3>
-                  <p className="mt-1 text-xs sm:text-sm text-slate-300">
-                    {tool.description}
-                  </p>
-                </div>
-                <span className="mt-3 text-[11px] text-sky-400 group-hover:text-sky-300">
-                  Open {tool.name.toLowerCase()} →
-                </span>
-              </Link>
-            ))}
-          </div>
-        </section>
-
-        {/* Utility / fun tools */}
-        <section className="mb-10 sm:mb-16">
-          <div className="mb-4 flex items-center justify-between gap-2">
-            <h2 className="text-lg sm:text-xl font-semibold text-slate-50">
-              Extra Tools
-            </h2>
-            <p className="text-xs sm:text-sm text-slate-400">
-              Small, single-purpose tools built on top of the colour screens.
-            </p>
-          </div>
-
-          <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
-            {utilityTools.map((tool) => (
-              <Link
-                key={tool.slug}
-                href={`/${tool.slug}`}
-                className="group flex flex-col justify-between rounded-2xl border border-slate-800 bg-slate-900/60 p-3 sm:p-4 hover:border-sky-500/70 hover:bg-slate-900 transition-colors"
-              >
-                <div>
                   <h3 className="text-sm sm:text-base font-semibold text-slate-50">
                     {tool.name}
                   </h3>
