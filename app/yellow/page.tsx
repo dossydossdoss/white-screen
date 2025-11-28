@@ -1,6 +1,8 @@
 import FullscreenColorPage from "../components/FullscreenColorPage";
+import { buildRelatedLinks } from "../../lib/links";
 
 export default function YellowScreenPage() {
+  const relatedLinks = buildRelatedLinks("en", "yellow").slice(0, 6);
   return (
     <FullscreenColorPage
       title="Yellow Screen"
@@ -11,6 +13,8 @@ export default function YellowScreenPage() {
       showHueSwatches={false}
       showShadeSwatches={true}
       shadeStops={[8, 20, 32, 44, 56, 68, 80, 92]}
+      currentSlug="yellow"
+      relatedLinks={relatedLinks}
     />
   );
 }

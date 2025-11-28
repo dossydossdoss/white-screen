@@ -18,6 +18,10 @@ type FullscreenColorPageProps = {
   showShadeSwatches?: boolean;
   showHexRgbInputs?: boolean;
   shadeStops?: number[]; // 0–100 lightness percentages for shade swatches
+  showBrightnessControl?: boolean;
+  currentSlug?: string;
+  relatedLinks?: { href: string; label: string }[];
+  relatedHeading?: string;
 };
 
 /* ---------- Color helpers ---------- */
@@ -199,6 +203,10 @@ export default function FullscreenColorPage({
   showShadeSwatches = true,
   showHexRgbInputs = true,
   shadeStops,
+  showBrightnessControl = true,
+  currentSlug,
+  relatedLinks,
+  relatedHeading,
 }: FullscreenColorPageProps) {
   // initialise from baseColor
   const hueMeta = buildHueRangeMeta(hueRange);
@@ -588,6 +596,27 @@ export default function FullscreenColorPage({
           )}
         </section>
       </main>
+
+      {currentSlug && relatedLinks && relatedLinks.length > 0 && (
+        <section className="border-t border-neutral-900 px-4 py-6 text-sm">
+          <div className="mx-auto max-w-5xl">
+            <div className="mb-3 text-xs font-semibold uppercase tracking-wide text-neutral-400">
+              {relatedHeading ?? "Other tools"}
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {relatedLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="rounded-full border border-neutral-800 px-3 py-1 text-xs text-neutral-100 transition hover:border-sky-500/70 hover:text-sky-200"
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
     </div>
   );
 }

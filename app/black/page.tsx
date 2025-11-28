@@ -1,7 +1,9 @@
 // app/black/page.tsx
 import FullscreenColorPage from "../components/FullscreenColorPage";
+import { buildRelatedLinks } from "../../lib/links";
 
 export default function BlackScreenPage() {
+  const relatedLinks = buildRelatedLinks("en", "black").slice(0, 6);
   return (
     <FullscreenColorPage
       title="Black Screen"
@@ -13,6 +15,8 @@ export default function BlackScreenPage() {
       showShadeSwatches={true}
       showHexRgbInputs={false}
       shadeStops={[0, 20, 40, 60, 80, 100]}  // from pure black to white
+      currentSlug="black"
+      relatedLinks={relatedLinks}
     />
   );
 }

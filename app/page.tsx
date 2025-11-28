@@ -1,5 +1,6 @@
 // app/page.tsx
 import Link from "next/link";
+import { languages } from "../lib/i18n";
 
 type ColorTool = {
   name: string;
@@ -20,6 +21,12 @@ const colorTools: ColorTool[] = [
     slug: "black",
     description: "Pure black screen for contrast, dead pixel checks, or night use.",
     baseColor: "#000000", // black
+  },
+  {
+    name: "Color Cycle",
+    slug: "cycle",
+    description: "Cycle between custom colours at your chosen speed.",
+    baseColor: "#A78BFA", // starting accent for the card
   },
   {
     name: "Red Screen",
@@ -77,14 +84,43 @@ export default function HomePage() {
       <div className="mx-auto max-w-5xl px-4 py-10 sm:py-16">
         {/* Hero */}
         <header className="mb-10 sm:mb-14">
+          <div className="mb-3 flex flex-wrap items-center gap-2 text-xs text-slate-400">
+            <span className="font-semibold text-slate-200">Languages:</span>
+            <div className="flex flex-wrap gap-2">
+              {languages.map((lang) => {
+                const href = lang === "en" ? "/" : `/${lang}`;
+                const label =
+                  lang === "en"
+                    ? "English"
+                    : lang === "es"
+                    ? "Español"
+                    : lang === "de"
+                    ? "Deutsch"
+                    : lang === "fr"
+                    ? "Français"
+                    : lang === "ja"
+                    ? "日本語"
+                    : lang;
+                return (
+                  <Link
+                    key={lang}
+                    href={href}
+                    className="rounded-full border border-slate-800 px-2 py-1 transition hover:border-sky-500/70 hover:text-sky-200"
+                  >
+                    {label}
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight">
-            Simple full-screen colour tools for{" "}
+            Full-screen colour tools for{" "}
             <span className="text-sky-400">lighting, testing, and focus</span>
           </h1>
           <p className="mt-4 max-w-2xl text-sm sm:text-base text-slate-300">
             Open a pure colour screen in one click. Use it as a softbox, pixel
-            tester, background, or prank tool. No login, no clutter—just clean
-            full-screen colour.
+            tester, or clean backdrop. No login, no clutter—just fullscreen
+            colour.
           </p>
         </header>
 
@@ -102,29 +138,38 @@ export default function HomePage() {
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
-            {colorTools.map((tool) => (
-              <Link
-                key={tool.slug}
-                href={`/${tool.slug}`}
-                className="group flex flex-col justify-between rounded-2xl border border-slate-800 bg-slate-900/60 p-3 sm:p-4 hover:border-sky-500/70 hover:bg-slate-900 transition-colors"
-              >
-                <div>
-                  <div
-                    className="mb-3 aspect-video w-full overflow-hidden rounded-xl border border-slate-800 shadow-inner"
-                    style={{ backgroundColor: tool.baseColor }}
-                  />
-                  <h3 className="text-sm sm:text-base font-semibold text-slate-50">
-                    {tool.name}
-                  </h3>
-                  <p className="mt-1 text-xs sm:text-sm text-slate-300">
-                    {tool.description}
-                  </p>
-                </div>
-                <span className="mt-3 text-[11px] text-sky-400 group-hover:text-sky-300">
-                  Open {tool.name.toLowerCase()} →
-                </span>
-              </Link>
-            ))}
+            {colorTools.map((tool) => {
+              const isCycle = tool.slug === "cycle";
+              return (
+                <Link
+                  key={tool.slug}
+                  href={`/${tool.slug}`}
+                  className="group flex flex-col justify-between rounded-2xl border border-slate-800 bg-slate-900/60 p-3 sm:p-4 hover:border-sky-500/70 hover:bg-slate-900 transition-colors"
+                >
+                  <div>
+                    <div
+                      className={`mb-3 aspect-video w-full overflow-hidden rounded-xl border border-slate-800 shadow-inner ${
+                        isCycle ? "cycle-preview" : ""
+                      }`}
+                      style={
+                        isCycle
+                          ? undefined
+                          : { backgroundColor: tool.baseColor }
+                      }
+                    />
+                    <h3 className="text-sm sm:text-base font-semibold text-slate-50">
+                      {tool.name}
+                    </h3>
+                    <p className="mt-1 text-xs sm:text-sm text-slate-300">
+                      {tool.description}
+                    </p>
+                  </div>
+                  <span className="mt-3 text-[11px] text-sky-400 group-hover:text-sky-300">
+                    Open {tool.name.toLowerCase()} →
+                  </span>
+                </Link>
+              );
+            })}
           </div>
         </section>
 

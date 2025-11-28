@@ -1,6 +1,8 @@
 import FullscreenColorPage from "../components/FullscreenColorPage";
+import { buildRelatedLinks } from "../../lib/links";
 
 export default function OrangeScreenPage() {
+  const relatedLinks = buildRelatedLinks("en", "orange").slice(0, 6);
   return (
     <FullscreenColorPage
       title="Orange Screen"
@@ -11,6 +13,8 @@ export default function OrangeScreenPage() {
       showHueSwatches={false}
       showShadeSwatches={true}
       shadeStops={[8, 20, 32, 44, 56, 68, 80, 92]}
+      currentSlug="orange"
+      relatedLinks={relatedLinks}
     />
   );
 }
