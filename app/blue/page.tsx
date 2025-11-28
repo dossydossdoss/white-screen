@@ -5,7 +5,7 @@ export default function BlueScreenPage() {
     <FullscreenColorPage
       title="Blue Screen"
       description="Bright blue screen for display testing, chroma work, and ambient lighting."
-      colorClass="bg-blue-500"
+      baseColor="#3B82F6"  // ← same as colorTools entry
     />
   );
 }

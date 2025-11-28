@@ -5,7 +5,7 @@ export default function RedScreenPage() {
     <FullscreenColorPage
       title="Red Screen"
       description="Fullscreen red screen for dead pixel tests and calibration."
-      baseColor="#ff0000"
+      baseColor="#EF4444"  // ← same as colorTools entry
     />
   );
 }
