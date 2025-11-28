@@ -1,65 +1,217 @@
-import Image from "next/image";
+// app/page.tsx
+import Link from "next/link";
 
-export default function Home() {
+type ColorTool = {
+  name: string;
+  slug: string;
+  description: string;
+  baseColor: string; // HEX used both here and on the sub-page
+};
+
+type UtilityTool = {
+  name: string;
+  slug: string;
+  description: string;
+};
+
+const colorTools: ColorTool[] = [
+  {
+    name: "White Screen",
+    slug: "white",
+    description: "Pure white full screen for lighting, cleaning, and stuck pixels.",
+    baseColor: "#FFFFFF", // white
+  },
+  {
+    name: "Black Screen",
+    slug: "black",
+    description: "Pure black screen for contrast, dead pixel checks, or night use.",
+    baseColor: "#000000", // black
+  },
+  {
+    name: "Red Screen",
+    slug: "red",
+    description: "Solid red screen for pixel testing and ambient lighting.",
+    baseColor: "#EF4444", // Tailwind red-500
+  },
+  {
+    name: "Green Screen",
+    slug: "green",
+    description: "Solid green screen for chroma key or pixel testing.",
+    baseColor: "#22C55E", // Tailwind green-500
+  },
+  {
+    name: "Blue Screen",
+    slug: "blue",
+    description: "Solid blue screen for focus, ambiance, or pixel tests.",
+    baseColor: "#3B82F6", // Tailwind blue-500
+  },
+  {
+    name: "Yellow Screen",
+    slug: "yellow",
+    description: "Soft yellow screen for warm reading or ambient light.",
+    baseColor: "#EAB308", // Tailwind yellow-500
+  },
+  {
+    name: "Pink Screen",
+    slug: "pink",
+    description: "Vibrant pink screen for cozy lighting and fun backgrounds.",
+    baseColor: "#EC4899", // Tailwind pink-500
+  },
+  {
+    name: "Purple Screen",
+    slug: "purple",
+    description: "Rich purple screen for relaxing, moody backdrops.",
+    baseColor: "#A855F7", // Tailwind purple-500
+  },
+  {
+    name: "Orange Screen",
+    slug: "orange",
+    description: "Warm orange screen for sunset-style ambient light.",
+    baseColor: "#F97316", // Tailwind orange-500
+  },
+  {
+    name: "Gray Screen",
+    slug: "gray",
+    description: "Neutral gray screen for calibration and eye comfort.",
+    baseColor: "#6B7280", // Tailwind gray-500
+  },
+];
+
+const utilityTools: UtilityTool[] = [
+  {
+    name: "Zoom Lighting",
+    slug: "zoom-lighting",
+    description: "Adjustable soft light screen for video calls and streaming.",
+  },
+  {
+    name: "Tip Screen",
+    slug: "tip-screen",
+    description: "Fake POS tipping screen for pranks, skits, or demos.",
+  },
+  {
+    name: "Signature Screen",
+    slug: "signature-screen",
+    description: "Full-screen signature pad style screen for videos or jokes.",
+  },
+  {
+    name: "DVD Screensaver",
+    slug: "dvd-screen",
+    description: "Classic bouncing DVD logo recreating the nostalgic screensaver.",
+  },
+  {
+    name: "Broken Screen",
+    slug: "broken-screen",
+    description: "Hyper realistic cracked-screen effect for harmless pranks.",
+  },
+];
+
+export default function HomePage() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <main className="min-h-screen bg-slate-950 text-slate-50">
+      <div className="mx-auto max-w-5xl px-4 py-10 sm:py-16">
+        {/* Hero */}
+        <header className="mb-10 sm:mb-14">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight">
+            Simple full-screen colour tools for{" "}
+            <span className="text-sky-400">lighting, testing, and focus</span>
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="mt-4 max-w-2xl text-sm sm:text-base text-slate-300">
+            Open a pure colour screen in one click. Use it as a softbox, pixel
+            tester, background, or prank tool. No login, no clutter—just clean
+            full-screen colour.
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+        </header>
+
+
+
+        {/* Colour screens */}
+        <section id="colour-tools" className="mb-10 sm:mb-14">
+          <div className="mb-4 flex items-center justify-between gap-2">
+            <h2 className="text-lg sm:text-xl font-semibold text-slate-50">
+              Colour Screen Tools
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-400">
+              Click any colour to open its full-screen tool.
+            </p>
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+            {colorTools.map((tool) => (
+              <Link
+                key={tool.slug}
+                href={`/${tool.slug}`}
+                className="group flex flex-col justify-between rounded-2xl border border-slate-800 bg-slate-900/60 p-3 sm:p-4 hover:border-sky-500/70 hover:bg-slate-900 transition-colors"
+              >
+                <div>
+                  <div
+                    className="mb-3 aspect-video w-full overflow-hidden rounded-xl border border-slate-800 shadow-inner"
+                    style={{ backgroundColor: tool.baseColor }}
+                  />
+                  <h3 className="text-sm sm:text-base font-semibold text-slate-50">
+                    {tool.name}
+                  </h3>
+                  <p className="mt-1 text-xs sm:text-sm text-slate-300">
+                    {tool.description}
+                  </p>
+                </div>
+                <span className="mt-3 text-[11px] text-sky-400 group-hover:text-sky-300">
+                  Open {tool.name.toLowerCase()} →
+                </span>
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        {/* Utility / fun tools */}
+        <section className="mb-10 sm:mb-16">
+          <div className="mb-4 flex items-center justify-between gap-2">
+            <h2 className="text-lg sm:text-xl font-semibold text-slate-50">
+              Extra Tools
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-400">
+              Small, single-purpose tools built on top of the colour screens.
+            </p>
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+            {utilityTools.map((tool) => (
+              <Link
+                key={tool.slug}
+                href={`/${tool.slug}`}
+                className="group flex flex-col justify-between rounded-2xl border border-slate-800 bg-slate-900/60 p-3 sm:p-4 hover:border-sky-500/70 hover:bg-slate-900 transition-colors"
+              >
+                <div>
+                  <h3 className="text-sm sm:text-base font-semibold text-slate-50">
+                    {tool.name}
+                  </h3>
+                  <p className="mt-1 text-xs sm:text-sm text-slate-300">
+                    {tool.description}
+                  </p>
+                </div>
+                <span className="mt-3 text-[11px] text-sky-400 group-hover:text-sky-300">
+                  Open {tool.name.toLowerCase()} →
+                </span>
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        {/* Footer */}
+        <footer className="border-t border-slate-900 pt-6 text-xs sm:text-sm text-slate-500 flex flex-wrap items-center justify-between gap-3">
+          <span>© {new Date().getFullYear()} White Screen Tools.</span>
+          <div className="flex flex-wrap gap-4">
+            <Link href="/about" className="hover:text-slate-300">
+              About
+            </Link>
+            <Link href="/contact" className="hover:text-slate-300">
+              Contact
+            </Link>
+            <Link href="/privacy" className="hover:text-slate-300">
+              Privacy
+            </Link>
+          </div>
+        </footer>
+      </div>
+    </main>
   );
 }
